@@ -1,4 +1,4 @@
-require_relative 'student'
+require_relative 'class_student'
 
 # Создаем несколько объектов Student с разными комбинациями данных
 student1 = Student.new('Иванов', 'Иван', 'Иванович', id: 1, phone: '1234567890', telegram: '@ivanov', email: 'ivanov@example.com')
@@ -7,5 +7,7 @@ student3 = Student.new('Сидоров', 'Сидор', 'Сидорович', id:
 
 # Выводим информацию о каждом студенте
 puts student1
+puts
 puts student2
+puts
 puts student3
