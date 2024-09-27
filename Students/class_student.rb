@@ -6,10 +6,24 @@ class Student
     @surname = surname
     @name = name
     @patronymic = patronymic
-    @phone = phone
+    self.phone = phone 
     @telegram = telegram
     @email = email
     @github = github
+  end
+
+
+  def phone=(phone)
+    if phone && !Student.valid_phone_number?(phone)
+      raise ArgumentError, "Неправильный формат телефонного номера"
+    end
+    @phone = phone
+  end
+
+
+  def self.valid_phone_number?(phone)
+
+    phone.match?(/\A\+?\d{10,}\z/)
   end
 
   def to_s
