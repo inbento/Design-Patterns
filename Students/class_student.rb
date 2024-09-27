@@ -13,12 +13,5 @@ class Student
   end
 
   def to_s
-    info = "Студент: #{@last_name} #{@first_name} #{@middle_name}\n"
-    info += "ID: #{@id}\n" if @id
-    info += "Телефон: #{@phone}\n" if @phone
-    info += "Telegram: #{@telegram}\n" if @telegram
-    info += "Email: #{@email}\n" if @email
-    info += "GitHub: #{@git}\n" if @git
-    info  
+    "ID: #{@id}, Фамилия: #{@surname}, Имя: #{@name}, Отчество: #{@patronymic}, Телефон: #{@phone}, Телеграм: #{@telegram}, Почта: #{@email}, Гит: #{@github}"
   end
-end
