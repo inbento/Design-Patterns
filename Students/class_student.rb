@@ -1,79 +1,15 @@
 class Student
-  attr_accessor :id, :last_name, :first_name, :middle_name, :phone, :telegram, :email, :git
-
-  def self.valid_phone?(phone)
-    !!(phone =~ /\A(\+7|8)\d{10}\z/)
-  end
-
-  def self.normalize_phone(phone)
-    phone.sub(/\A8/, '+7')
-  end
-
-  def self.valid_name?(name)
-    !!(name =~ /\A[А-Яа-яЁё]{2,50}\z/)
-  end
-
-  def self.valid_telegram?(telegram)
-    !!(telegram =~ /\A@[a-zA-Z0-9_]{5,}\z/)
-  end
-
-  def self.valid_email?(email)
-    !!(email =~ /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i)
-  end
-
-  def self.valid_git?(git)
-    !!(git =~ /\Ahttps?:\/\/github\.com\/[\w\-]+\z/)
-  end
+  attr_reader :id, :last_name, :first_name, :middle_name, :phone, :telegram, :email, :git
 
   def initialize(last_name, first_name, middle_name, options = {})
-    raise ArgumentError, "Некорректная фамилия: #{last_name}" unless Student.valid_name?(last_name)
-    raise ArgumentError, "Некорректное имя: #{first_name}" unless Student.valid_name?(first_name)
-    raise ArgumentError, "Некорректное отчество: #{middle_name}" unless Student.valid_name?(middle_name)
-
-    @last_name = last_name
-    @first_name = first_name
-    @middle_name = middle_name
-    @id = options[:id]
-
-    if options[:phone]
-      if Student.valid_phone?(options[:phone])
-        @phone = Student.normalize_phone(options[:phone])
-      else
-        raise ArgumentError, "Некорректный номер телефона: #{options[:phone]}"
-      end
-    end
-
-    if options[:telegram]
-      raise ArgumentError, "Некорректный Telegram: #{options[:telegram]}" unless Student.valid_telegram?(options[:telegram])
-      @telegram = options[:telegram]
-    end
-
-    if options[:email]
-      raise ArgumentError, "Некорректный email: #{options[:email]}" unless Student.valid_email?(options[:email])
-      @email = options[:email]
-    end
-
-    if options[:git]
-      raise ArgumentError, "Некорректный GitHub: #{options[:git]}" unless Student.valid_git?(options[:git])
-      @git = options[:git]
-    end
-
-    validate
-  end
-
-  def validate_contact
-    if !@phone && !@telegram && !@email
-      raise ArgumentError, "Должен быть хотя бы один контакт для связи: телефон, Telegram или email."
-    end
-  end
-
-  def validate_git
-    raise ArgumentError, "Не указан GitHub аккаунт." unless @git
-  end
-  
-  def validate
-    validate_contact
-    validate_git
+    self.last_name = last_name
+    self.first_name = first_name
+    self.middle_name = middle_name
+    self.id = options[:id]
+    self.phone = options[:phone]
+    self.telegram = options[:telegram]
+    self.email = options[:email]
+    self.git = options[:git]
   end
 
   def to_s
@@ -85,4 +21,102 @@ class Student
     info += "GitHub: #{@git}\n" if @git
     info
   end
+
+  def last_name=(last_name)
+    if Student.valid_name_format?(last_name)
+      @last_name = last_name
+    else
+      raise ArgumentError, "Фамилия должна содержать только буквы"
+    end
+  end
+
+  def first_name=(first_name)
+    if  Student.valid_name_format?(first_name)
+      @first_name = first_name
+    else
+      raise ArgumentError, "Имя должно содержать только буквы"
+    end
+  end
+
+  def middle_name=(middle_name)
+    if  Student.valid_name_format?(middle_name)
+      @middle_name = middle_name
+    else
+      raise ArgumentError, "Отчество должно содержать только буквы"
+    end
+  end
+
+  def id=(id)
+    if id.is_a?(Integer)
+      @id = id
+    else
+      raise ArgumentError, "ID должен быть числом"
+    end
+  end
+
+  def phone=(phone)
+    if phone.nil? || Student.valid_phone_format?(phone)
+      @phone = phone.nil? ? nil : normalize_phone(phone)
+    else
+      raise ArgumentError, "Некорректный номер телефона: #{phone}"
+    end
+  end
+
+  def telegram=(telegram)
+    if telegram.nil? || Student.valid_telegram_format?(telegram)
+      @telegram = telegram
+    else
+      raise ArgumentError, "Некорректный Telegram: #{telegram}"
+    end
+  end
+
+  def email=(email)
+    if email.nil? || Student.valid_email_format?(email)
+      @email = email
+    else
+      raise ArgumentError, "Некорректный email: #{email}"
+    end
+  end
+
+  def git=(git)
+    if git.nil? || Student.valid_git_format?(git)
+      @git = git
+    else 
+      raise ArgumentError, "Некорректный формат Git: #{git}"
+    end
+  end
+  
+  def validate
+    validate_git
+    validate_contact
+  end
+
+  def self.valid_phone_format?(phone)
+    !!(phone =~ /\A(\+7|8)\d{10}\z/)
+  end
+
+  def self.valid_name_format?(name)
+    !!(name =~ /\A[А-Яа-яЁё]{2,50}\z/)
+  end
+
+  def self.valid_telegram_format?(telegram)
+    !!(telegram =~ /\A@[a-zA-Z0-9_]{5,}\z/)
+  end
+
+  def self.valid_email_format?(email)
+    !!(email =~ /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i)
+  end
+
+  def self.valid_git_format?(git)
+    !!(git =~ /\Ahttps?:\/\/github\.com\/[\w\-]+\z/)
+  end
+
+  def normalize_phone(phone)
+    phone.sub(/\A8/, '+7')
+  end
+
+  def validate_contact
+    !@phone.nil? || !@telegram.nil? || !@email.nil?
+  end
+
 end
