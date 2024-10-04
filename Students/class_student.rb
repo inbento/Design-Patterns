@@ -12,6 +12,13 @@ class Student
     self.git = options[:git]
   end
 
+  def set_contacts(phone: nil, telegram: nil, email: nil, git: nil)
+    self.phone = phone if phone
+    self.telegram = telegram if telegram
+    self.email = email if email
+    self.git = git if git
+  end
+
   def to_s
     info = "Студент: #{@last_name} #{@first_name} #{@middle_name}\n"
     info += "ID: #{@id}\n" if @id
@@ -54,6 +61,8 @@ class Student
     end
   end
 
+  private
+
   def phone=(phone)
     if phone.nil? || Student.valid_phone_format?(phone)
       @phone = phone.nil? ? nil : normalize_phone(phone)
@@ -85,7 +94,7 @@ class Student
       raise ArgumentError, "Некорректный формат Git: #{git}"
     end
   end
-  
+
   def validate
     validate_git
     validate_contact

@@ -17,6 +17,13 @@ begin
   })
 
   puts student2
+  puts
+
+  student2.set_contacts(phone: "+79912235997", email: "petrov@example.com")
+  puts "\nОбновлённая информация о студенте:"
+  puts student2
+  puts
+  #student2.email = "petrovfail@example.com" #АШИБКА
 
 rescue ArgumentError => e
   puts "Ошибка: #{e.message}"
