@@ -29,6 +29,26 @@ class Student
     info
   end
 
+  def getInfo
+    "#{surname_with_initials}; GitHub: #{git}; Связь: #{contact_info}"
+  end
+
+  def surname_with_initials
+    "#{@last_name} #{first_name[0]}. #{middle_name[0]}."
+  end
+
+  def contact_info
+    if @phone
+      "Телефон: #{@phone}"
+    elsif @telegram
+      "Telegram: #{@telegram}"
+    elsif @email
+      "Email: #{@email}"
+    else
+      "Никакой контакт не указан"
+    end
+  end
+
   def last_name=(last_name)
     if Student.valid_name_format?(last_name)
       @last_name = last_name
