@@ -1,5 +1,7 @@
 require_relative 'class_student'
 require_relative 'StudentShort'
+require_relative 'StudentBase'
+
 begin
   student1 = Student.new("Иванов", "Иван", "Иванович", {
     phone: "+79991234567",

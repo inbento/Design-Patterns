@@ -1,15 +1,14 @@
-class StudentShort < Student
-  attr_reader :id, :surname_with_initials, :git, :contact
+require_relative 'StudentBase'
+
+class StudentShort < StudentBase
+  attr_reader :surname_with_initials
 
   def initialize(arg1, arg2 = nil)
     if arg1.is_a?(Student)
-      student = arg1
-      @id = student.id || 'ID не задан'
-      @surname_with_initials = student.surname_with_initials
-      @git = student.git
-      @contact = student.contact_info
+      super(id: arg1.id, git: arg1.git, contact: arg1.contact)
+      @surname_with_initials = arg1.surname_with_initials
     elsif arg1.is_a?(Integer) && arg2.is_a?(String)
-      @id = arg1
+      super(id: arg1)
       parse_info(arg2)
     else
       raise ArgumentError, "Неверные аргументы для инициализации"
@@ -24,6 +23,6 @@ class StudentShort < Student
   end
 
   def to_s
-    "ID: #{@id}, Фамилия и инициалы: #{@surname_with_initials}, GitHub: #{@git}, Контакт: #{@contact}"
+    "ID: #{@id || "Не указан"}, Фамилия и инициалы: #{@surname_with_initials}, GitHub: #{@git}, Контакт: #{@contact}"
   end
 end
