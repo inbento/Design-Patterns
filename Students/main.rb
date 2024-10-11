@@ -2,7 +2,6 @@ require_relative 'class_student'
 
 begin
   student1 = Student.new("Иванов", "Иван", "Иванович", {
-    id: 1,
     phone: "+79991234567",
     telegram: "@ivanov", 
     email: "ivanov@example.com",

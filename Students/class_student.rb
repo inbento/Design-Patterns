@@ -5,7 +5,7 @@ class Student
     self.last_name = last_name
     self.first_name = first_name
     self.middle_name = middle_name
-    self.id = options[:id]
+    self.id = options[:id] # ID может быть nil
     self.phone = options[:phone]
     self.telegram = options[:telegram]
     self.email = options[:email]
@@ -21,11 +21,11 @@ class Student
 
   def to_s
     info = "Студент: #{@last_name} #{@first_name} #{@middle_name}\n"
-    info += "ID: #{@id}\n" if @id
-    info += "Телефон: #{@phone}\n" if @phone
-    info += "Telegram: #{@telegram}\n" if @telegram
-    info += "Email: #{@email}\n" if @email
-    info += "GitHub: #{@git}\n" if @git
+    info += "ID: #{@id || 'id не задан'}\n"
+    info += "Телефон: #{@phone || 'телефон не указан'}\n"
+    info += "Telegram: #{@telegram || 'tg не указан'}\n"
+    info += "Email: #{@email || 'email не указан'}\n"
+    info += "GitHub: #{@git || 'git не указан'}\n"
     info
   end
 
@@ -38,7 +38,7 @@ class Student
   end
 
   def first_name=(first_name)
-    if  Student.valid_name_format?(first_name)
+    if Student.valid_name_format?(first_name)
       @first_name = first_name
     else
       raise ArgumentError, "Имя должно содержать только буквы"
@@ -46,7 +46,7 @@ class Student
   end
 
   def middle_name=(middle_name)
-    if  Student.valid_name_format?(middle_name)
+    if Student.valid_name_format?(middle_name)
       @middle_name = middle_name
     else
       raise ArgumentError, "Отчество должно содержать только буквы"
@@ -54,7 +54,7 @@ class Student
   end
 
   def id=(id)
-    if id.is_a?(Integer)
+    if id.nil? || id.is_a?(Integer)
       @id = id
     else
       raise ArgumentError, "ID должен быть числом"
@@ -95,11 +95,6 @@ class Student
     end
   end
 
-  def validate
-    validate_git
-    validate_contact
-  end
-
   def self.valid_phone_format?(phone)
     !!(phone =~ /\A(\+7|8)\d{10}\z/)
   end
@@ -123,9 +118,4 @@ class Student
   def normalize_phone(phone)
     phone.sub(/\A8/, '+7')
   end
-
-  def validate_contact
-    !@phone.nil? || !@telegram.nil? || !@email.nil?
-  end
-
 end
