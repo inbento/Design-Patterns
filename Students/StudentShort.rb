@@ -23,6 +23,6 @@ class StudentShort < StudentBase
   end
 
   def to_s
-    "ID: #{@id || "Не указан"}, Фамилия и инициалы: #{@surname_with_initials}, GitHub: #{@git}, Контакт: #{@contact}"
+    "ID: #{@id || " "}, Фамилия и инициалы: #{@surname_with_initials}, GitHub: #{@git}, Контакт: #{@contact}"
   end
 end

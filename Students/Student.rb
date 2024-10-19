@@ -3,15 +3,13 @@ require_relative 'StudentBase'
 class Student < StudentBase
   attr_reader :last_name, :first_name, :middle_name, :phone, :telegram, :email
 
-  def initialize(last_name, first_name, middle_name, options = {})
+  def initialize(last_name, first_name, middle_name, id: nil, phone: nil, telegram: nil, email: nil, git: nil)
     self.last_name = last_name
     self.first_name = first_name
     self.middle_name = middle_name
-    self.id = options[:id]
-    self.phone = options[:phone]
-    self.telegram = options[:telegram]
-    self.email = options[:email]
-    super(id: options[:id], git: options[:git], contact: contact)
+    self.id = id
+    set_contacts(phone: phone, telegram: telegram, email: email, git: git) 
+    super(id: id, git: git)
   end
 
   def set_contacts(phone: nil, telegram: nil, email: nil, git: nil)
@@ -23,32 +21,20 @@ class Student < StudentBase
 
   def to_s
     info = "Студент: #{@last_name} #{@first_name} #{@middle_name}\n"
-    info += "ID: #{@id || 'id не задан'}\n"
-    info += "Телефон: #{@phone || 'телефон не указан'}\n"
-    info += "Telegram: #{@telegram || 'tg не указан'}\n"
-    info += "Email: #{@email || 'email не указан'}\n"
-    info += "GitHub: #{@git || 'git не указан'}\n"
+    info += "ID: #{@id || ''}\n"
+    info += "Телефон: #{@phone || ''}\n"
+    info += "Telegram: #{@telegram || ''}\n"
+    info += "Email: #{@email || ''}\n"
+    info += "GitHub: #{@git || ''}\n"
     info
   end
 
   def getInfo
-    "#{surname_with_initials}; GitHub: #{git}; Связь: #{contact_info}"
+    "#{surname_with_initials}; GitHub: #{git}; Связь: #{contact}"
   end
 
   def surname_with_initials
     "#{@last_name} #{first_name[0]}. #{middle_name[0]}."
-  end
-
-  def contact_info
-    if @phone
-      "Телефон: #{@phone}"
-    elsif @telegram
-      "Telegram: #{@telegram}"
-    elsif @email
-      "Email: #{@email}"
-    else
-      "Никакой контакт не указан"
-    end
   end
 
   def last_name=(last_name)

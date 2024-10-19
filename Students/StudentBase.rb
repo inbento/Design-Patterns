@@ -1,10 +1,22 @@
 class StudentBase
-  attr_reader :id, :git, :contact
+  attr_reader :id, :git
   
   def initialize(id: nil, git: nil, contact: nil)
     @id = id
     @git = git
     @contact = contact
+  end
+
+  def contact
+    if @phone
+      "Телефон: #{@phone}"
+    elsif @telegram
+      "Telegram: #{@telegram}"
+    elsif @email
+      "Email: #{@email}"
+    else
+      nil
+    end
   end
   
   def validate
