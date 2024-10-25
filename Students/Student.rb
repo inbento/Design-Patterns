@@ -1,14 +1,13 @@
-require_relative 'StudentBase'
+require_relative 'Student_Base'
 
-class Student < StudentBase
+class Student < Student_Base
   attr_reader :last_name, :first_name, :middle_name, :phone, :telegram, :email
 
   def initialize(last_name, first_name, middle_name, id: nil, phone: nil, telegram: nil, email: nil, git: nil)
     self.last_name = last_name
     self.first_name = first_name
     self.middle_name = middle_name
-    self.id = id
-    set_contacts(phone: phone, telegram: telegram, email: email, git: git) 
+    set_contacts(phone: phone, telegram: telegram, email: email) 
     super(id: id, git: git)
   end
 
@@ -16,7 +15,6 @@ class Student < StudentBase
     self.phone = phone if phone
     self.telegram = telegram if telegram
     self.email = email if email
-    self.git = git if git
   end
 
   def to_s
@@ -29,14 +27,11 @@ class Student < StudentBase
     info
   end
 
-  def getInfo
-    "#{surname_with_initials}; GitHub: #{git}; Связь: #{contact}"
+  def get_Info
+    "#{surname_with_initials} | GitHub: #{git} | Контакт: #{contact}"
   end
 
-  def surname_with_initials
-    "#{@last_name} #{first_name[0]}. #{middle_name[0]}."
-  end
-
+ 
   def last_name=(last_name)
     if Student.valid_name_format?(last_name)
       @last_name = last_name
@@ -61,15 +56,9 @@ class Student < StudentBase
     end
   end
 
-  def id=(id)
-    if id.nil? || id.is_a?(Integer)
-      @id = id
-    else
-      raise ArgumentError, "ID должен быть числом"
-    end
-  end
 
   private
+
 
   def phone=(phone)
     if phone.nil? || Student.valid_phone_format?(phone)
@@ -92,14 +81,6 @@ class Student < StudentBase
       @email = email
     else
       raise ArgumentError, "Некорректный email: #{email}"
-    end
-  end
-
-  def git=(git)
-    if git.nil? || Student.valid_git_format?(git)
-      @git = git
-    else 
-      raise ArgumentError, "Некорректный формат Git: #{git}"
     end
   end
 
