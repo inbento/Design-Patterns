@@ -12,7 +12,7 @@ class Student_Base
     elsif !@surname_with_initials.nil?
       @surname_with_initials
     else
-      raise NotImplementedError, "Не хватает данных для вычисления фамилии и инициалов"
+      false
     end
  end
 
@@ -48,10 +48,10 @@ class Student_Base
 
   def validate
     unless StudentBase.has_git?(@git)
-      raise ArgumentError, "ID: #{id} Git-репозиторий не указан."
+      false
     end
     unless StudentBase.has_contact?(@contact)
-      raise ArgumentError, "ID: #{id} Не указан ни один контакт."
+      false
     end
   end
   
