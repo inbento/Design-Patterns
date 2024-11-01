@@ -8,6 +8,12 @@ def reverse_between_min_and_max(arr)
 
 end
 
+def find_two_largest(arr)
+
+  two_largest = arr.max(2)
+
+  yield(two_largest)
+end
 
 puts "Выберите способ ввода данных:
       \n1. Ввести с клавиатуры
@@ -46,7 +52,9 @@ end
 puts 
 puts "Выберите задачу:
         \n1. Переставить в обратном порядке элементы массива, расположенные 
-        между его минимальным и максимальным элементами."
+        между его минимальным и максимальным элементами.
+        \n2. Найти два наибольших элемента."
+
 
 method_choice = gets.chomp
 
@@ -56,6 +64,9 @@ case method_choice
 
   when "1"
     puts reverse_between_min_and_max(input_data) {|min_index, max_index| (input_data[0...min_index + 1] + input_data[min_index + 1...max_index].reverse + input_data[max_index..-1])}.inspect
+  when "2"
+    two_largest_in_array = find_two_largest(input_data){|two_largest| puts "Два наибольших элемента в массиве: #{two_largest}"}
+    puts 
   else
     puts "Некорректный выбор задачи."
 
