@@ -15,6 +15,15 @@ def find_two_largest(arr)
   yield(two_largest)
 end
 
+def find_max_odd(arr)
+
+  max_odd = arr.select(&:odd?).max
+
+  yield(max_odd)
+
+end
+
+
 puts "Выберите способ ввода данных:
       \n1. Ввести с клавиатуры
       \n2. Прочитать из файла строку"
@@ -53,7 +62,8 @@ puts
 puts "Выберите задачу:
         \n1. Переставить в обратном порядке элементы массива, расположенные 
         между его минимальным и максимальным элементами.
-        \n2. Найти два наибольших элемента."
+        \n2. Найти два наибольших элемента.
+        \n3. Найти максимальный нечетный элемент."
 
 
 method_choice = gets.chomp
@@ -65,8 +75,9 @@ case method_choice
   when "1"
     puts reverse_between_min_and_max(input_data) {|min_index, max_index| (input_data[0...min_index + 1] + input_data[min_index + 1...max_index].reverse + input_data[max_index..-1])}.inspect
   when "2"
-    two_largest_in_array = find_two_largest(input_data){|two_largest| puts "Два наибольших элемента в массиве: #{two_largest}"}
-    puts 
+    find_two_largest(input_data){|two_largest| puts "Два наибольших элемента в массиве: #{two_largest}"}
+  when "3"
+    find_max_odd(input_data){|max_odd| puts "Максимальный нечетный элемент: #{max_odd}"}
   else
     puts "Некорректный выбор задачи."
 
