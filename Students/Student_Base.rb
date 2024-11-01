@@ -46,14 +46,15 @@ class Student_Base
     end
   end
 
-  def validate
-    unless StudentBase.has_git?(@git)
-      false
-    end
-    unless StudentBase.has_contact?(@contact)
-      false
-    end
+def validate
+  if !StudentBase.has_git?(@git)
+    false
   end
+  if !StudentBase.has_contact?(@contact)
+    false
+  end
+  true
+end
   
   def self.has_git?(git)
     !git.nil? 
