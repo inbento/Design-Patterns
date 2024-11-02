@@ -23,6 +23,15 @@ def find_max_odd(arr)
 
 end
 
+def most_frequent_indices(arr)
+
+  unique_elements = arr.uniq
+
+  most_frequent_element = unique_elements.max_by { |element| arr.count(element) }
+
+  indices = arr.each_index.select { |i| arr[i] == most_frequent_element }
+
+end
 
 puts "Выберите способ ввода данных:
       \n1. Ввести с клавиатуры
@@ -63,7 +72,9 @@ puts "Выберите задачу:
         \n1. Переставить в обратном порядке элементы массива, расположенные 
         между его минимальным и максимальным элементами.
         \n2. Найти два наибольших элемента.
-        \n3. Найти максимальный нечетный элемент."
+        \n3. Найти максимальный нечетный элемент.
+        \n4. Для введенного списка построить список с номерами элемента,
+             который повторяется наибольшее число раз."
 
 
 method_choice = gets.chomp
@@ -78,6 +89,9 @@ case method_choice
     find_two_largest(input_data){|two_largest| puts "Два наибольших элемента в массиве: #{two_largest}"}
   when "3"
     find_max_odd(input_data){|max_odd| puts "Максимальный нечетный элемент: #{max_odd}"}
+  when "4"
+    frequent_indices = most_frequent_indices(input_data)
+    puts "Номера элемента, который повторяется наибольшее число раз: #{frequent_indices}"
   else
     puts "Некорректный выбор задачи."
 
