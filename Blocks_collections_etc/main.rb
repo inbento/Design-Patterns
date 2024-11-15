@@ -33,6 +33,12 @@ def most_frequent_indices(arr)
 
 end
 
+def filter_and_divide(array)
+
+  array.select { |element| array.count(element) == 1 && element % array.index(element) == 0 }
+
+end
+
 puts "Выберите способ ввода данных:
       \n1. Ввести с клавиатуры
       \n2. Прочитать из файла строку"
@@ -74,7 +80,9 @@ puts "Выберите задачу:
         \n2. Найти два наибольших элемента.
         \n3. Найти максимальный нечетный элемент.
         \n4. Для введенного списка построить список с номерами элемента,
-             который повторяется наибольшее число раз."
+             который повторяется наибольшее число раз.
+        \n5. Построить массив из элементов, делящихся на свой номер и встречающихся 
+             в исходном массиве 1 раз."
 
 
 method_choice = gets.chomp
@@ -92,6 +100,10 @@ case method_choice
   when "4"
     frequent_indices = most_frequent_indices(input_data)
     puts "Номера элемента, который повторяется наибольшее число раз: #{frequent_indices}"
+  when "5"
+    divided_by_their_number = filter_and_divide(input_data)
+    puts "Массив, состоящий из элементов, делящихся на свой номер и встречающихся 
+          в исходном массиве 1 раз: #{divided_by_their_number}"
   else
     puts "Некорректный выбор задачи."
 
