@@ -1,7 +1,7 @@
 require_relative 'Student_Base'
 
 class Student_Short < Student_Base
-
+    
     private_class_method :new
 
   def initialize(surname_with_initials, git, contact, id: nil)

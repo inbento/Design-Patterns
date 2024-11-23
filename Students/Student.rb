@@ -56,6 +56,25 @@ class Student < Student_Base
     end
   end
 
+  def self.valid_phone_format?(phone)
+    !!(phone =~ /\A(\+7|8)\d{10}\z/)
+  end
+
+  def self.valid_name_format?(name)
+    !!(name =~ /\A[А-Яа-яЁё]{2,50}\z/)
+  end
+
+  def self.valid_telegram_format?(telegram)
+    !!(telegram =~ /\A@[a-zA-Z0-9_]{5,}\z/)
+  end
+
+  def self.valid_email_format?(email)
+    !!(email =~ /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i)
+  end
+
+  def self.valid_git_format?(git)
+    !!(git =~ /\Ahttps?:\/\/github\.com\/[\w\-]+\z/)
+  end
 
   private
 
@@ -84,27 +103,8 @@ class Student < Student_Base
     end
   end
 
-  def self.valid_phone_format?(phone)
-    !!(phone =~ /\A(\+7|8)\d{10}\z/)
-  end
-
-  def self.valid_name_format?(name)
-    !!(name =~ /\A[А-Яа-яЁё]{2,50}\z/)
-  end
-
-  def self.valid_telegram_format?(telegram)
-    !!(telegram =~ /\A@[a-zA-Z0-9_]{5,}\z/)
-  end
-
-  def self.valid_email_format?(email)
-    !!(email =~ /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i)
-  end
-
-  def self.valid_git_format?(git)
-    !!(git =~ /\Ahttps?:\/\/github\.com\/[\w\-]+\z/)
-  end
-
   def normalize_phone(phone)
     phone.sub(/\A8/, '+7')
   end
+  
 end
