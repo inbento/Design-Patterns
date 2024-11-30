@@ -23,6 +23,12 @@ class Student_Short < Student_Base
   end
 
 
+  def to_s
+
+    "ID: #{@id || " "}, Фамилия и инициалы: #{@surname_with_initials}, GitHub: #{@git}, Контакт: #{@contact}"
+
+  end
+
   private
 
   def self.parse_info(info_string)
@@ -41,9 +47,5 @@ class Student_Short < Student_Base
     else
       raise ArgumentError, "Неверный формат строки"
     end
-  end
-
-  def to_s
-    "ID: #{@id || " "}, Фамилия и инициалы: #{@surname_with_initials}, GitHub: #{@git}, Контакт: #{@contact}"
   end
 end
