@@ -1,37 +1,32 @@
 require_relative 'Student'
-require_relative 'StudentShort'
-require_relative 'StudentBase'
+require_relative 'Student_Short'
+require_relative 'Student_Base'
+require_relative 'Student_binary_tree'
+require 'date'
 
 begin
-  student1 = Student.new("Иванов", "Иван", "Иванович", phone: "+79991234567",telegram: "@ivanov", email: "ivanov@example.com",git: "https://github.com/ivanov")
 
-  puts student1
-  puts "-----------------------------------------------------"
-  puts student1.getInfo
-  puts "-----------------------------------------------------"
-  student2 = Student.new("Петров", "Петр", "Петрович", id: 2, phone: "89991234568")
+  student1 = Student.new("Миков", "Никита", "Сергеевич", birth_date: Date.new(2004, 1, 10), id: 1, phone: "+79898924547", git: "https://github.com/inbento")
+  student2 = Student.new("Гурьянов", "Сергей", "Романович", birth_date: Date.new(1999, 9, 25), id: 2, phone: "+79183345888", git: "https://github.com/gur")
+  student3 = Student.new("Абобов", "Абоб", "Абобович", birth_date: Date.new(2018, 8, 22), id: 3, phone: "+79183156080", git: "https://github.com/abob")
 
-  puts student2
-  puts "-----------------------------------------------------"
+  tree = Binary_Search_Tree.new
+  tree.insert(student1)
+  tree.insert(student2)
+  tree.insert(student3)
 
-  student2.set_contacts(phone: "+79912235997", email: "petrov@example.com")
-  puts "\nОбновлённая информация о студенте:"
-  puts student2
-  puts "-----------------------------------------------------"
-  #student2.email = "petrovfail@example.com" #АШИБКА
+  tree.each do |student|
+    puts student.to_s
+    puts
+  end
 
+  puts "--------------------------------------"
+  students = tree.select { |student| student.birth_date < Date.new(2005, 1, 1) }
 
-  puts "Примеры для класса StudentShort:"
-  puts "-----------------------------------------------------"
-
-  student = Student.new('Иванов', 'Иван', 'Иванович', git: 'https://github.com/ivanov', phone: '89012345678')
-  student_short1 = StudentShort.new(student)
-  puts student_short1
-
-  info_string = "Иванов И. И.; GitHub: https://github.com/ivanov; Связь: Телефон: +789012345678"
-  student_short2 = StudentShort.new(1, info_string)
-  puts student_short2
-
+  students.each do |student|
+    puts student
+    puts
+  end
 
 rescue ArgumentError => e
   puts "Ошибка: #{e.message}"

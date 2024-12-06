@@ -1,12 +1,13 @@
 require_relative 'Student_Base'
 
 class Student < Student_Base
-  attr_reader :last_name, :first_name, :middle_name, :phone, :telegram, :email
+  attr_reader :last_name, :first_name, :middle_name, :phone, :telegram, :email, :birth_date
 
-  def initialize(last_name, first_name, middle_name, id: nil, phone: nil, telegram: nil, email: nil, git: nil)
+  def initialize(last_name, first_name, middle_name, id: nil, phone: nil, telegram: nil, email: nil, git: nil, birth_date: nil)
     self.last_name = last_name
     self.first_name = first_name
     self.middle_name = middle_name
+    self.birth_date = birth_date
     set_contacts(phone: phone, telegram: telegram, email: email) 
     super(id: id, git: git)
   end
@@ -55,6 +56,15 @@ class Student < Student_Base
       raise ArgumentError, "Отчество должно содержать только буквы"
     end
   end
+
+  def birth_date=(birth_date)
+    if birth_date.nil? || birth_date.is_a?(Date)
+      @birth_date = birth_date
+    else
+      raise ArgumentError, "Дата рождения должна быть корректной датой"
+    end
+  end
+
 
   def self.valid_phone_format?(phone)
     !!(phone =~ /\A(\+7|8)\d{10}\z/)
@@ -106,5 +116,4 @@ class Student < Student_Base
   def normalize_phone(phone)
     phone.sub(/\A8/, '+7')
   end
-  
 end
