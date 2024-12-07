@@ -12,7 +12,7 @@ class Student_Base
     elsif !@surname_with_initials.nil?
       @surname_with_initials
     else
-      false
+      nil
     end
  end
 
@@ -56,11 +56,11 @@ def validate
   true
 end
   
-  def self.has_git?(git)
+  def has_git?(git)
     !git.nil? 
   end
   
-  def self.has_contact?(contact)
+  def has_contact?(contact)
     !contact.nil? 
   end
          
