@@ -1,6 +1,7 @@
 require_relative 'Student_Base'
 
 class Student < Student_Base
+  include Comparable
   attr_reader :last_name, :first_name, :middle_name, :phone, :telegram, :email, :birth_date
 
   def initialize(last_name, first_name, middle_name, id: nil, phone: nil, telegram: nil, email: nil, git: nil, birth_date: nil)
@@ -65,6 +66,9 @@ class Student < Student_Base
     end
   end
 
+  def <=>(student)
+    self.birth_date <=> student.birth_date
+  end
 
   def self.valid_phone_format?(phone)
     !!(phone =~ /\A(\+7|8)\d{10}\z/)
@@ -84,6 +88,10 @@ class Student < Student_Base
 
   def self.valid_git_format?(git)
     !!(git =~ /\Ahttps?:\/\/github\.com\/[\w\-]+\z/)
+  end
+
+  def self.valid_birth_date_format?(date)
+    Date.parse(date) rescue false
   end
 
   private

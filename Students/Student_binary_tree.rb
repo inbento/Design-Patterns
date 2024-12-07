@@ -24,7 +24,7 @@ class Binary_Search_Tree
 
     return Node.new(student) if node.nil?
 
-    if student.birth_date < node.student.birth_date
+    if student < node.student
       node.left = insert_node(node.left, student)
     else
       node.right = insert_node(node.right, student)
