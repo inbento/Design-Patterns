@@ -1,0 +1,25 @@
+ЕСЛИ ЭТО НЕ ТО, ЧТО НУЖНО СКАЗАТЬ, ТО Я РЕСТАРТНУСЬ
+В макс мы должны указать два аргумента и сказать как их считать, а в макс_бай указывается один аргумент и его поле
+Отличия в синтаксисе: 
+a.max{|a, b| a.length <=> b.length}
+a.max_by{|a| a. length }
+
+Примеры для max:
+words = ["apple", "banana", "cherry"]
+words.max { |a, b| a.length <=> b.length }
+# => "banana"
+
+people = [{name: "Alice", age: 25}, {name: "Bob", age: 30}, {name: "Charlie", age: 20}]
+people.max { |a, b| a[:age] <=> b[:age] }
+# => {name: "Bob", age: 30}
+
+Примеры для max_by:
+words = ["apple", "banana", "cherry"]
+words.max_by { |word| word.length }
+# => "banana"
+
+people = [{name: "Alice", age: 25}, {name: "Bob", age: 30}, {name: "Charlie", age: 20}]
+people.max_by { |person| person[:age] }
+# => {name: "Bob", age: 30}
+
+
