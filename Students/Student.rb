@@ -2,6 +2,7 @@ require_relative 'Student_Base'
 require 'date'
 
 class Student < Student_Base
+  include Comparable
   attr_reader :last_name, :first_name, :middle_name, :phone, :telegram, :email, :birth_date
 
   def initialize(attributes = {})
