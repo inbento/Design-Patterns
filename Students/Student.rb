@@ -1,22 +1,36 @@
 require_relative 'Student_Base'
+require 'date'
 
 class Student < Student_Base
-  include Comparable
   attr_reader :last_name, :first_name, :middle_name, :phone, :telegram, :email, :birth_date
 
-  def initialize(last_name, first_name, middle_name, id: nil, phone: nil, telegram: nil, email: nil, git: nil, birth_date: nil)
-    self.last_name = last_name
-    self.first_name = first_name
-    self.middle_name = middle_name
-    self.birth_date = birth_date
-    set_contacts(phone: phone, telegram: telegram, email: email) 
-    super(id: id, git: git)
+  def initialize(attributes = {})
+    self.last_name = attributes[:last_name]
+    self.first_name = attributes[:first_name]
+    self.middle_name = attributes[:middle_name]
+    self.birth_date = attributes[:birth_date]
+    set_contacts(phone: attributes[:phone], telegram: attributes[:telegram], email: attributes[:email]) 
+    super(id: attributes[:id], git: attributes[:git])
   end
 
   def set_contacts(phone: nil, telegram: nil, email: nil, git: nil)
     self.phone = phone if phone
     self.telegram = telegram if telegram
     self.email = email if email
+  end
+
+  def to_hash
+    { 
+    id: self.id, 
+    first_name: self.first_name, 
+    last_name: self.last_name, 
+    middle_name: self.middle_name, 
+    birth_date: self.birth_date, 
+    telegram: self.telegram,
+    email: self.email, 
+    phone: self.phone, 
+    git: self.git 
+    }
   end
 
   def to_s
@@ -59,23 +73,20 @@ class Student < Student_Base
   end
 
   def birth_date=(birth_date)
-    if birth_date.nil? || birth_date.is_a?(Date)
+    if birth_date.nil? || Student.valid_date?(birth_date)
       @birth_date = birth_date
     else
       raise ArgumentError, "Дата рождения должна быть корректной датой"
     end
   end
 
-  def <=>(student)
-    self.birth_date <=> student.birth_date
-  end
 
   def self.valid_phone_format?(phone)
     !!(phone =~ /\A(\+7|8)\d{10}\z/)
   end
 
   def self.valid_name_format?(name)
-    !!(name =~ /\A[А-Яа-яЁё]{2,50}\z/)
+    !!(name =~ /\A[А-Яа-яЁёA-Za-z]{2,50}\z/)
   end
 
   def self.valid_telegram_format?(telegram)
@@ -90,7 +101,7 @@ class Student < Student_Base
     !!(git =~ /\Ahttps?:\/\/github\.com\/[\w\-]+\z/)
   end
 
-  def self.valid_birth_date_format?(date)
+  def self.valid_date?(date)
     Date.parse(date) rescue false
   end
 
