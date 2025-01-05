@@ -1,0 +1,24 @@
+[
+  {
+    "id": 1,
+    "first_name": "Миков",
+    "last_name": "Никита",
+    "middle_name": "Сергеевич",
+    "birth_date": "2004-09-09",
+    "telegram": "@Nekita",
+    "email": "nekita@gmail.com",
+    "phone": null,
+    "git": "https://github.com/inbento"
+  },
+  {
+    "id": 2,
+    "first_name": "auiogbuig",
+    "last_name": "qognneg",
+    "middle_name": "gqpojgo",
+    "birth_date": "2009-01-01",
+    "telegram": "@asopgop",
+    "email": "gwengon@gmail.com",
+    "phone": null,
+    "git": "https://github.com/giowengn"
+  }
+]

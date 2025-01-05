@@ -1,0 +1,10 @@
+---
+- :id: 1
+  :first_name: Миков
+  :last_name: Никита
+  :middle_name: Сергеевич
+  :birth_date: '2004-09-09'
+  :telegram: "@Nekita"
+  :email: nekita@gmail.com
+  :phone:
+  :git: https://github.com/inbento
