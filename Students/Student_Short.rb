@@ -1,7 +1,7 @@
 require_relative 'Student_Base'
 
 class Student_Short < Student_Base
-    
+
     private_class_method :new
 
   def initialize(surname_with_initials, git, contact, id: nil)
@@ -22,12 +22,23 @@ class Student_Short < Student_Base
     end
   end
 
+  def self.bydb(attributes = {})
+    surname_with_initials = "#{attributes[:last_name]} #{attributes[:first_name][0]}.#{attributes[:middle_name][0]}." 
+    contact = nil
+    if attributes[:email]
+      contact = attributes[:email]
+    elsif attributes[:phone]
+      contact = attributes[:phone]
+    elsif attributes[:telegram]
+      contact = attributes[:telegram]
+    end
+    new(surname_with_initials, attributes[:git], contact, id: nil)
+  end
 
   def to_s
-
     "ID: #{@id || " "}, Фамилия и инициалы: #{@surname_with_initials}, GitHub: #{@git}, Контакт: #{@contact}"
-
   end
+
 
   private
 
@@ -48,4 +59,5 @@ class Student_Short < Student_Base
       raise ArgumentError, "Неверный формат строки"
     end
   end
+
 end
