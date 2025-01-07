@@ -20,5 +20,16 @@
     "email": "gwengon@gmail.com",
     "phone": null,
     "git": "https://github.com/giowengn"
+  },
+  {
+    "id": 3,
+    "first_name": "Дора",
+    "last_name": "Дура",
+    "middle_name": "Супердура",
+    "birth_date": "2000-05-03",
+    "telegram": "@doradura",
+    "email": "doradura@gmail.com",
+    "phone": null,
+    "git": "https://github.com/doradura"
   }
 ]

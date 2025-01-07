@@ -8,3 +8,21 @@
   :email: nekita@gmail.com
   :phone:
   :git: https://github.com/inbento
+- :id: 2
+  :first_name: Дора
+  :last_name: Дура
+  :middle_name: Супердура
+  :birth_date: '2000-05-03'
+  :telegram: "@doradura"
+  :email: doradura@gmail.com
+  :phone:
+  :git: https://github.com/doradura
+- :id: 3
+  :first_name: Сергей
+  :last_name: Гурьянов
+  :middle_name: Романович
+  :birth_date: '1999-10-11'
+  :telegram: "@guryanov"
+  :email: guryanov@gmail.com
+  :phone:
+  :git: https://github.com/guryanov
