@@ -5,7 +5,7 @@ require_relative '../Data_List/Data_Table'
 require_relative 'Data_Base_CLient.rb'
 require 'date'
 
-db_config = 'sqlite://students.db'
+db_config = 'postgres://postgres:123@localhost:5432/students_db'
 db_client = Data_Base_CLient.instance(db_config)
 db_client.setup_schema
 students_list = Students_List_DB.new()
@@ -35,8 +35,8 @@ st2 = Student.new(
 )
 
 
-students_list.add_student(st1)
-students_list.add_student(st2)
+#students_list.add_student(st1)
+#students_list.add_student(st2)
 
 data_list = students_list.get_k_n_student_short_list(1, 10)
 data_table = data_list.get_data

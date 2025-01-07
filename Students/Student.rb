@@ -81,6 +81,13 @@ class Student < Student_Base
     end
   end
 
+  def <=>(student)
+    self.birth_date <=> student.birth_date
+  end
+
+  def ==(student)
+    self.git == student.git || self.phone == student.phone || self.telegram == student.telegram || self.mail == student.mail
+  end
 
   def self.valid_phone_format?(phone)
     !!(phone =~ /\A(\+7|8)\d{10}\z/)

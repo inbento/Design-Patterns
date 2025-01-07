@@ -39,8 +39,9 @@ class Data_List
 
     def validate_index(index)
       unless index.between?(0, @elements.size - 1)
-        raise IndexError, 'Индекс вне диапазона'
+        false
       end
+      true
     end
 
   end

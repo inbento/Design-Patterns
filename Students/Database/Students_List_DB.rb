@@ -30,7 +30,7 @@ class Students_List_DB
       student.last_name, student.first_name, student.middle_name,
       student.birth_date, student.phone, student.git, student.telegram, student.email
     ])
-    student.id = Data_Base_CLient.instance.query('SELECT last_insert_rowid()').first[:last_insert_rowid]
+    student.id = result.first[:id]
   end
 
   def update_student_by_id(id, student)
