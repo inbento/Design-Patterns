@@ -1,4 +1,4 @@
-class Interface_Read_Write
+class Strategy_Students
 
     def read(file_path)
       raise NotImplementedError, 'Метод должен быть определён в подклассе'

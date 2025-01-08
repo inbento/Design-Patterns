@@ -36,7 +36,7 @@ class Students_List_Base
     end
   
     def add_student(student)
-        if @students.any? { |s| s.git == student.git || s.contact == student.contact }
+        if @students.any? { |s| s == student }
             raise NameError, 'Студент с такимими данными уже существует'
         end
 
@@ -48,7 +48,7 @@ class Students_List_Base
     def update_student(id, updated_student)
         index = @students.find_index { |student| student.id == id }
         raise IndexError, 'Студент с таким id не найден' unless index
-        if @students.any? { |s| s.git == updated_student.git || s.contact == updated_student.contact }
+        if @students.any? { |s| s == updated_student }
             raise NameError, 'Студент с такимими данными уже существует'
         end
         updated_student.id = id
