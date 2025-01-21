@@ -1,4 +1,8 @@
+require_relative 'Data_table.rb'
+
 class Data_List
+
+  attr_accessor :elements, :selected_id, :count, :observers
 
     def initialize(elements)
 
@@ -6,18 +10,19 @@ class Data_List
         raise ArgumentError, 'Данные должны быть массивом'
       end
 
-      @elements = elements.dup
-      @selected_id = []
+      self.elements = elements.dup
+      self.selected_id = []
+      self.observers = []
     end
   
     def select(number)
       validate_index(number)
-      id = @elements[number].id 
-      @selected_id << id unless @selected_id.include?(id)
+      id = self.elements[number].id 
+      self.selected_id << id unless self.selected_id.include?(id)
     end
   
     def get_selected
-      @selected_id.dup
+      self.selected_id.dup
     end
 
     def get_names
@@ -33,6 +38,18 @@ class Data_List
     
     def get_info
       raise NotImplementedError, 'Метод get_info должен быть реализован в наследниках'
+    end
+
+    def add_observer(observer)
+      self.observers << observer
+    end
+
+
+    def notify(data)
+      self.observers.each do |observer|
+        observer.set_table_params(data.get_names, self.count)
+        observer.set_table_data(data.get_data)
+      end
     end
   
     private

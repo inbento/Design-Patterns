@@ -1,6 +1,6 @@
-require_relative 'Interface_Read_Write.rb'
+require_relative 'Strategy_Students.rb'
 
-class Strategy_JSON < Interface_Read_Write
+class Strategy_JSON < Strategy_Students
 
   def read(file_path)
     data = File.exist?(file_path) ? JSON.parse(File.read(file_path), symbolize_names: true) : []
