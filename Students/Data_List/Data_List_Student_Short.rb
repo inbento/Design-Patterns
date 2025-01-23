@@ -8,7 +8,7 @@ class Data_List_Student_Short < Data_List
   end
 
   def get_info
-    data = @elements.map.with_index(1) do |student, index|
+    data = @elements.map.with_index(@start) do |student, index|
       [
         index,                          
         student.surname_with_initials,     
@@ -19,5 +19,4 @@ class Data_List_Student_Short < Data_List
 
     data
   end
-
 end

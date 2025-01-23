@@ -28,6 +28,7 @@ class Students_List_Base
         start = (k - 1) * n
         students_short = @students[start, n].map { |student| Student_Short.by_student(student) }
         data_list ||= Data_List_Student_Short.new(students_short)
+	    data_list.start = start + 1
         data_list
     end
 

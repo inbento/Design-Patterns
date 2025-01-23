@@ -2,7 +2,7 @@ require_relative 'Data_table.rb'
 
 class Data_List
 
-  attr_accessor :elements, :selected_id, :count, :observers
+  attr_accessor :elements, :selected_id, :count, :observers, :start
 
     def initialize(elements)
 
@@ -13,6 +13,7 @@ class Data_List
       self.elements = elements.dup
       self.selected_id = []
       self.observers = []
+      self.start = 0
     end
   
     def select(number)
