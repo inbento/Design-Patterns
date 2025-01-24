@@ -1,0 +1,33 @@
+<!-- app/views/clients/index.html.erb -->
+<div class="container">
+  <h1>Клиенты</h1>
+
+  <%= link_to 'Новый клиент', new_client_path, class: 'btn' %>
+  <%= link_to 'Вернуться на главную страницу', root_path, class: 'btn' %>
+  
+  <table>
+    <thead>
+      <tr>
+        <th>ФИО</th>
+        <th>Паспорт (серия и номер)</th>
+        <th>Телефон</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @clients.each do |client| %>
+        <tr>
+          <td><%= client.last_name_and_initials %></td>
+          <td><%= client.passport %></td>
+          <td><%= client.telephone %></td>
+          <td>
+            <%= link_to 'Просмотреть', client %> |
+            <%= link_to 'Изменить', edit_client_path(client) %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <br>
+</div>

@@ -1,0 +1,62 @@
+<div class="container">
+  <h1>Информация о клиенте</h1>
+
+  <% if flash[:alert] %>
+    <div class="alert alert-warning">
+      <%= flash[:alert] %>
+    </div>
+  <% end %>
+
+  <p>
+    <strong>ФИО:</strong>
+    <%= @client.last_name_and_initials %>
+  </p>
+
+  <p>
+    <strong>Паспорт:</strong>
+    <%= @client.passport %>
+  </p>
+
+  <p>
+    <strong>Телефон:</strong>
+    <%= @client.telephone %>
+  </p>
+
+  <h2>Бронирования клиента</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>ID брони</th>
+        <th>Дата заезда</th>
+        <th>Дата выезда</th>
+        <th>ID номера</th>
+        <th>Категория номера</th>
+        <th>Вместимость</th>
+        <th>Цена номера</th>
+        <th>ID услуги</th>
+        <th>Название услуги</th>
+        <th>Цена услуги</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @client.bookings.each do |booking| %>
+        <tr>
+          <td><%= booking.id %></td>
+          <td><%= booking.check_in_date %></td>
+          <td><%= booking.departure_date %></td>
+          <td><%= booking.room.id %></td>
+          <td><%= booking.room.category %></td>
+          <td><%= booking.room.capacity %></td>
+          <td><%= number_to_currency(booking.room.price) %></td>
+          <td><%= booking.service.id %></td>
+          <td><%= booking.service.title %></td>
+          <td><%= number_to_currency(booking.service.price) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <%= link_to 'Назад', clients_path, class: 'btn' %>
+  <%= link_to 'На главную', root_path, class: 'btn' %>
+  <%= button_to "Удалить", @client, class: 'btn', method: :delete, data: { confirm: 'Вы уверены?' } %>
+</div>

@@ -1,0 +1,49 @@
+<!-- app/views/home/index.html.erb -->
+<div class="container">
+  <h1>Добро пожаловать в систему управления хостелом</h1>
+
+  <div class="actions">
+    <h2>Все таблицы</h2>
+    <%= link_to 'Клиенты', clients_path, class: 'btn' %>
+    <%= link_to 'Номера', rooms_path, class: 'btn' %>
+    <%= link_to 'Услуги', services_path, class: 'btn' %>
+  </div>
+
+  <h2>Брони</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Клиент</th>
+        <th>Номер</th>
+        <th>Услуги</th>
+        <th>Дата заселения</th>
+        <th>Дата выезда</th>
+        <th>Действия</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @bookings.each do |booking| %>
+        <tr>
+          <td><%= booking.client.last_name_and_initials %></td>
+          <td><%= booking.room.category %></td>
+          <td><%= booking.service.title %></td>
+          <td><%= booking.check_in_date %></td>
+          <td><%= booking.departure_date %></td>
+          <td>
+            <%= link_to 'Просмотреть', booking %> |
+            <%= link_to 'Изменить', edit_booking_path(booking) %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <br>
+  <%= link_to 'Новая бронь', new_booking_path, class: 'btn' %>
+
+  <div class="database-actions">
+    <h4>Управление базой данных</h4>
+    <%= button_to 'Разорвать соединение', home_disconnect_path, method: :get, class: 'btn btn-danger' %>
+  </div>
+
+</div>

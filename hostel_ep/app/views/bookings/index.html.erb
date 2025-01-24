@@ -1,0 +1,36 @@
+<!-- app/views/bookings/index.html.erb -->
+<div class="container">
+  <h1>Брони</h1>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Клиент</th>
+        <th>Номер</th>
+        <th>Услуга</th>
+        <th>Дата заселения</th>
+        <th>Дата выезда</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @bookings.each do |booking| %>
+        <tr>
+          <td><%= booking.client.last_name_and_initials %></td>
+          <td><%= booking.room.category %></td>
+          <td><%= booking.service.title %></td>
+          <td><%= booking.check_in_date %></td>
+          <td><%= booking.departure_date %></td>
+          <td>
+            <%= link_to 'Просмотреть', booking %> |
+            <%= link_to 'Изменить', edit_booking_path(booking) %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <br>
+  <%= link_to 'Новая бронь', new_booking_path, class: 'btn' %>
+  <%= link_to 'На главную', root_path, class: 'btn' %>
+</div>

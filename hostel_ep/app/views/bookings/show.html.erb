@@ -1,0 +1,68 @@
+<div class="container">
+  <h1>Информация о бронировании</h1>
+
+  <p>
+    <strong>ID брони:</strong>
+    <%= @booking.id %>
+  </p>
+
+  <p>
+    <strong>Дата заезда:</strong>
+    <%= @booking.check_in_date %>
+  </p>
+
+  <p>
+    <strong>Дата выезда:</strong>
+    <%= @booking.departure_date %>
+  </p>
+
+  <h2>Клиент</h2>
+  <p>
+    <strong>ID клиента:</strong>
+    <%= @booking.client.id %>
+  </p>
+  <p>
+    <strong>ФИО клиента:</strong>
+    <%= @booking.client.last_name_and_initials %>
+  </p>
+  <p>
+    <strong>Телефон клиента:</strong>
+    <%= @booking.client.telephone %>
+  </p>
+
+  <h2>Номер</h2>
+  <p>
+    <strong>ID номера:</strong>
+    <%= @booking.room.id %>
+  </p>
+  <p>
+    <strong>Категория номера:</strong>
+    <%= @booking.room.category %>
+  </p>
+  <p>
+    <strong>Вместимость:</strong>
+    <%= @booking.room.capacity %>
+  </p>
+  <p>
+    <strong>Цена номера:</strong>
+    <%= number_to_currency(@booking.room.price) %>
+  </p>
+
+  <h2>Услуга</h2>
+  <p>
+    <strong>ID услуги:</strong>
+    <%= @booking.service.id %>
+  </p>
+  <p>
+    <strong>Название услуги:</strong>
+    <%= @booking.service.title %>
+  </p>
+  <p>
+    <strong>Цена услуги:</strong>
+    <%= number_to_currency(@booking.service.price) %>
+  </p>
+
+  <%= link_to 'Назад', bookings_path, class: 'btn' %>
+  <%= link_to 'На главную', root_path, class: 'btn' %>
+  <%= button_to "Удалить", @booking, class: 'btn', method: :delete, data: { confirm: 'Вы уверены?' } %>
+</div>

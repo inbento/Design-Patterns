@@ -1,0 +1,31 @@
+<!-- app/views/services/index.html.erb -->
+<div class="container">
+  <h1>Услуги</h1>
+
+  <%= link_to 'Добавить услугу', new_service_path, class: 'btn' %>
+  <%= link_to 'Вернуться на главную страницу', root_path, class: 'btn' %>
+  
+  <table>
+    <thead>
+      <tr>
+        <th>Название услуги</th>
+        <th>Цена</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @services.each do |service| %>
+        <tr>
+          <td><%= service.title %></td>
+          <td><%= number_to_currency(service.price) %></td>
+          <td>
+            <%= link_to 'Просмотреть', service %> |
+            <%= link_to 'Измененить', edit_service_path(service) %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <br>
+</div>

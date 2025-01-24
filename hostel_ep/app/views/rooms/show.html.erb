@@ -1,0 +1,52 @@
+<div class="container">
+  <h1>Информация о номере</h1>
+
+  <p>
+    <strong>Категория:</strong>
+    <%= @room.category %>
+  </p>
+
+  <p>
+    <strong>Вместимость:</strong>
+    <%= @room.capacity %>
+  </p>
+
+  <p>
+    <strong>Цена:</strong>
+    <%= number_to_currency(@room.price) %>
+  </p>
+
+  <h2>Бронирования номера</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>ID брони</th>
+        <th>Дата заезда</th>
+        <th>Дата выезда</th>
+        <th>ID клиента</th>
+        <th>ФИО клиента</th>
+        <th>ID услуги</th>
+        <th>Название услуги</th>
+        <th>Цена услуги</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @room.bookings.each do |booking| %>
+        <tr>
+          <td><%= booking.id %></td>
+          <td><%= booking.check_in_date %></td>
+          <td><%= booking.departure_date %></td>
+          <td><%= booking.client.id %></td>
+          <td><%= booking.client.last_name_and_initials %></td>
+          <td><%= booking.service.id %></td>
+          <td><%= booking.service.title %></td>
+          <td><%= number_to_currency(booking.service.price) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <%= link_to 'Назад', rooms_path, class: 'btn' %>
+  <%= link_to 'На главную', root_path, class: 'btn' %>
+    <%= button_to "Удалить", @room, class: 'btn', method: :delete, data: { confirm: 'Вы уверены?' } %>
+</div>

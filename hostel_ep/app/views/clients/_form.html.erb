@@ -1,0 +1,26 @@
+<!-- app/views/clients/_form.html.erb -->
+<%= form_with(model: client) do |form| %>
+  <div class="field">
+    <%= form.label :last_name_and_initials, "ФИО (формат: Абоба.А.А)" %>
+    <%= form.text_field :last_name_and_initials, placeholder: "Абоба.А.А", maxlength: 15, required: true %>
+    <small class="hint">Формат: Абоба.А.А, максимум 15 символов.</small>
+  </div>
+
+  <div class="field">
+    <%= form.label :passport, "Паспорт (серия и номер)" %>
+    <%= form.text_field :passport, placeholder: "xx xx xxxxxx", required: true %>
+    <small class="hint">Формат: xx xx xxxxxx (только цифры).</small>
+  </div>
+
+  <div class="field">
+    <%= form.label :telephone, "Телефон (формат: 8хххххххххх или +7хххххххххх)" %>
+    <%= form.text_field :telephone, placeholder: "8хххххххххх или +7хххххххххх", pattern: "(\+7|8)\d{10}", required: true %>
+    <small class="hint">Формат: 8хххххххххх или +7хххххххххх.</small>
+  </div>
+
+  <div class="actions">
+    <%= form.submit 'Сохранить', class: 'btn' %>
+    <%= link_to 'Назад', clients_path, class: 'btn' %>
+    <%= link_to 'На главную', root_path, class: 'btn' %>
+  </div>
+<% end %>

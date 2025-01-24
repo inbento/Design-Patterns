@@ -1,0 +1,24 @@
+<!-- app/views/rooms/_form.html.erb -->
+<%= form_with(model: room) do |form| %>
+  <div class="field">
+    <%= form.label :category, "Тип номера" %>
+    <%= form.select :category, ['обычный', 'премиум', 'люкс'], {}, { required: true } %>
+  </div>
+
+  <div class="field">
+    <%= form.label :capacity, "Вместимость"%>
+    <%= form.number_field :capacity %>
+  </div>
+
+  <div class="field">
+  <%= form.label :price, "Цена" %>
+  <%= form.number_field :price, step: 1, required: true %>
+  <small class="hint">Цена должна быть целым числом.</small>
+  </div>
+
+  <div class="actions">
+    <%= form.submit 'Сохранить', class: 'btn' %>
+    <%= link_to 'Назад', rooms_path, class: 'btn' %>
+    <%= link_to 'Вернуться на главную', root_path, class: 'btn' %>
+  </div>
+<% end %>

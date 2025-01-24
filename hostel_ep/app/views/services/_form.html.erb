@@ -1,0 +1,19 @@
+<!-- app/views/services/_form.html.erb -->
+<%= form_with(model: service) do |form| %>
+  <div class="field">
+  <%= form.label :title, "Название услуги" %>
+  <%= form.text_field :title, maxlength: 30, required: true %>
+  <small class="hint">Максимум 30 символов.</small>
+  </div>
+
+  <div class="field">
+    <%= form.label :price , "Цена"%>
+    <%= form.number_field :price, step: 0.01 %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit 'Сохранить', class: 'btn' %>
+    <%= link_to 'Назад', services_path, class: 'btn' %>
+    <%= link_to 'Вернуться на главную страницу', root_path, class: 'btn' %>
+  </div>
+<% end %>

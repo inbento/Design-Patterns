@@ -1,0 +1,33 @@
+<!-- app/views/rooms/index.html.erb -->
+<div class="container">
+  <h1>Номера</h1>
+
+  <%= link_to 'Новый номер', new_room_path, class: 'btn' %>
+  <%= link_to 'Вернуться на главную страницу', root_path, class: 'btn' %>
+  
+  <table>
+    <thead>
+      <tr>
+        <th>Категория</th>
+        <th>Вместимость</th>
+        <th>Цена(день/ночь)</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @rooms.each do |room| %>
+        <tr>
+          <td><%= room.category %></td>
+          <td><%= room.capacity %></td>
+          <td><%= number_to_currency(room.price) %></td>
+          <td>
+            <%= link_to 'Просмотреть', room %> |
+            <%= link_to 'Изменить', edit_room_path(room) %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <br>
+</div>
